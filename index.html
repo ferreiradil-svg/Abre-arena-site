@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ABRE ARENA | Ranking Oficial</title>
+  <meta name="description" content="Ranking oficial ABRE ARENA de Beach Tennis. Acompanhe atletas, pontuação, resultados e regras dos torneios." />
+  <link rel="icon" href="logo-abre-arena-500.png" />
+
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    :root {
+      --yellow: #dfff00;
+      --yellow-2: #f7ff1a;
+      --black: #050505;
+      --black-2: #0b0b0b;
+      --card: #111;
+      --line: rgba(223,255,0,.28);
+      --text: #ffffff;
+      --muted: #b8b8b8;
+      --shadow: 0 24px 80px rgba(0,0,0,.58);
+    }
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background:
+        radial-gradient(circle at 18% 8%, rgba(223,255,0,.12), transparent 30%),
+        radial-gradient(circle at 92% 18%, rgba(223,255,0,.08), transparent 28%),
+        linear-gradient(180deg, #050505, #090909 50%, #050505);
+      color: var(--text);
+      line-height: 1.5;
+      overflow-x: hidden;
+    }
+    a { color: inherit; }
+    .glow {
+      position: fixed;
+      inset: -20%;
+      background: radial-gradient(circle, rgba(223,255,0,.055), transparent 35%);
+      pointer-events: none;
+      z-index: -1;
+      animation: floatGlow 8s ease-in-out infinite alternate;
+    }
+    @keyframes floatGlow { from { transform: translate(-5%, -3%); } to { transform: translate(5%, 3%); } }
+
+    nav {
+      position: fixed;
+      top: 0; left: 0; width: 100%;
+      z-index: 50;
+      background: rgba(5,5,5,.82);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--line);
+    }
+    .nav-inner {
+      max-width: 1180px;
+      margin: auto;
+      padding: 12px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      font-weight: 1000;
+      letter-spacing: .8px;
+    }
+    .brand img {
+      width: 52px;
+      height: 52px;
+      object-fit: contain;
+      filter: drop-shadow(0 0 14px rgba(223,255,0,.38));
+    }
+    .nav-links { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; }
+    .nav-links a {
+      text-decoration: none;
+      color: #e9e9e9;
+      font-size: 13px;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: .7px;
+      transition: .2s;
+    }
+    .nav-links a:hover { color: var(--yellow); }
+    .nav-cta {
+      background: var(--yellow);
+      color: #000 !important;
+      padding: 10px 15px;
+      border-radius: 999px;
+      box-shadow: 0 0 24px rgba(223,255,0,.18);
+    }
+
+    header {
+      min-height: 100vh;
+      padding: 116px 18px 72px;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      background:
+        linear-gradient(rgba(0,0,0,.62), rgba(0,0,0,.94)),
+        radial-gradient(circle at center top, rgba(223,255,0,.20), transparent 42%);
+      position: relative;
+      overflow: hidden;
+    }
+    header:before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image: linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px);
+      background-size: 48px 48px;
+      mask-image: linear-gradient(to bottom, rgba(0,0,0,.85), transparent 82%);
+    }
+    header:after {
+      content: "";
+      position: absolute;
+      bottom: -120px;
+      width: 760px;
+      height: 240px;
+      background: rgba(223,255,0,.11);
+      filter: blur(90px);
+      border-radius: 50%;
+    }
+    .hero { max-width: 980px; position: relative; z-index: 2; }
+    .hero-logo {
+      width: min(230px, 52vw);
+      height: auto;
+      margin: 0 auto 22px;
+      filter: drop-shadow(0 0 30px rgba(223,255,0,.46));
+      animation: pulseLogo 3.4s ease-in-out infinite;
+    }
+    @keyframes pulseLogo { 0%,100% { transform: scale(1); } 50% { transform: scale(1.025); } }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 9px 18px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      color: var(--yellow);
+      background: rgba(223,255,0,.06);
+      font-weight: 1000;
+      letter-spacing: 1px;
+      margin-bottom: 16px;
+      text-transform: uppercase;
+    }
+    h1 {
+      font-size: clamp(50px, 10vw, 116px);
+      line-height: .88;
+      text-transform: uppercase;
+      letter-spacing: -3px;
+      text-shadow: 0 0 38px rgba(223,255,0,.15);
+    }
+    h1 span { display: block; color: #fff; }
+    h1 strong { color: var(--yellow); }
+    .subtitle {
+      max-width: 780px;
+      margin: 24px auto 32px;
+      font-size: clamp(18px, 3vw, 26px);
+      color: #e6e6e6;
+    }
+    .buttons { display: flex; justify-content: center; gap: 14px; flex-wrap: wrap; }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 50px;
+      padding: 14px 23px;
+      border-radius: 16px;
+      text-decoration: none;
+      font-weight: 1000;
+      text-transform: uppercase;
+      transition: .22s;
+    }
+    .btn-primary { background: var(--yellow); color: #000; box-shadow: 0 16px 32px rgba(223,255,0,.18); }
+    .btn-secondary { border: 1px solid var(--line); color: var(--yellow); background: rgba(255,255,255,.03); }
+    .btn:hover { transform: translateY(-3px); }
+
+    section { padding: 88px 18px; }
+    .container { max-width: 1180px; margin: auto; }
+    .section-head { text-align: center; margin-bottom: 36px; }
+    .section-title {
+      font-size: clamp(32px, 5vw, 54px);
+      text-transform: uppercase;
+      letter-spacing: -1px;
+      line-height: 1;
+    }
+    .section-title span { color: var(--yellow); }
+    .section-sub { color: var(--muted); margin-top: 12px; font-size: 17px; }
+
+    .stats-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-top: -42px;
+      position: relative;
+      z-index: 5;
+    }
+    .stat-box {
+      background: linear-gradient(180deg, rgba(255,255,255,.055), rgba(255,255,255,.02));
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      padding: 22px;
+      text-align: center;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(10px);
+    }
+    .stat-box strong { display:block; color: var(--yellow); font-size: 34px; line-height: 1; }
+    .stat-box small { color: var(--muted); text-transform: uppercase; font-weight: 900; }
+
+    .highlight-strip {
+      margin-top: 28px;
+      padding: 18px;
+      border-radius: 22px;
+      background: linear-gradient(90deg, rgba(223,255,0,.10), rgba(255,255,255,.03));
+      border: 1px solid var(--line);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .highlight-strip strong { color: var(--yellow); text-transform: uppercase; }
+
+    .athletes-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 22px; }
+    .athlete-card {
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(180deg, #171717, #070707);
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      padding: 16px;
+      text-align: center;
+      box-shadow: var(--shadow);
+      transition: .25s;
+    }
+    .athlete-card:before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(120deg, transparent, rgba(223,255,0,.09), transparent);
+      transform: translateX(-120%);
+      transition: .55s;
+    }
+    .athlete-card:hover { transform: translateY(-6px); border-color: var(--yellow); }
+    .athlete-card:hover:before { transform: translateX(120%); }
+    .athlete-card.top1 { border: 2px solid var(--yellow); }
+    .athlete-rank {
+      position: absolute;
+      top: 14px; left: 14px;
+      background: var(--yellow);
+      color: #000;
+      font-weight: 1000;
+      padding: 7px 12px;
+      border-radius: 999px;
+      z-index: 2;
+    }
+    .athlete-photo {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+      border-radius: 22px;
+      background: #161616;
+      border: 1px solid rgba(255,255,255,.09);
+      position: relative;
+      z-index: 1;
+    }
+    .athlete-card h3 { margin-top: 14px; text-transform: uppercase; font-size: 20px; position: relative; z-index: 1; }
+    .athlete-points { color: var(--yellow); font-size: 30px; font-weight: 1000; position: relative; z-index: 1; }
+    .athlete-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 14px; position: relative; z-index: 1; }
+    .athlete-stat { background: #0d0d0d; border: 1px solid #242424; border-radius: 14px; padding: 10px; }
+    .athlete-stat small { display: block; color: var(--muted); font-size: 11px; text-transform: uppercase; }
+    .athlete-stat strong { font-size: 18px; }
+
+    .panel {
+      background: linear-gradient(180deg, #151515, #080808);
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      padding: 22px;
+      box-shadow: var(--shadow);
+    }
+    .ranking-toolbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 16px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+    .ranking-pill { color: #000; background: var(--yellow); font-weight: 1000; padding: 7px 12px; border-radius: 999px; }
+    .ranking-wrap { overflow-x: auto; }
+    table { width: 100%; border-collapse: collapse; min-width: 650px; }
+    th, td { padding: 16px 12px; border-bottom: 1px solid rgba(255,255,255,.08); text-align: left; }
+    th { color: var(--yellow); text-transform: uppercase; font-size: 13px; letter-spacing: .7px; }
+    td:last-child, th:last-child { text-align: right; }
+    .pos { color: var(--yellow); font-weight: 1000; }
+    .top1-row { background: rgba(223,255,0,.10); }
+
+    .rules-image { text-align: center; }
+    .rules-image img {
+      width: 100%;
+      max-width: 760px;
+      border-radius: 28px;
+      border: 1px solid var(--line);
+      box-shadow: 0 25px 80px rgba(0,0,0,.62);
+    }
+
+    .matches { display: grid; gap: 14px; }
+    .match {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      gap: 14px;
+      padding: 16px;
+      border-radius: 18px;
+      background: #0d0d0d;
+      border: 1px solid rgba(255,255,255,.09);
+      transition: .2s;
+    }
+    .match:hover { border-color: var(--line); transform: translateY(-2px); }
+    .score { color: var(--yellow); font-size: 24px; font-weight: 1000; }
+    .right { text-align: right; }
+
+    .whatsapp {
+      margin-top: 30px;
+      border-radius: 30px;
+      padding: 40px 22px;
+      background: linear-gradient(135deg, var(--yellow), #f5ff65);
+      color: #000;
+      text-align: center;
+      box-shadow: 0 18px 48px rgba(223,255,0,.16);
+    }
+    .whatsapp h2 { font-size: clamp(28px, 5vw, 44px); text-transform: uppercase; line-height: 1; }
+    .whatsapp p { margin-top: 10px; font-weight: 700; }
+    .whatsapp a {
+      display: inline-flex;
+      margin-top: 18px;
+      padding: 14px 24px;
+      border-radius: 16px;
+      background: #000;
+      color: var(--yellow);
+      text-decoration: none;
+      font-weight: 1000;
+      text-transform: uppercase;
+    }
+    .floating-wa {
+      position: fixed;
+      right: 18px;
+      bottom: 18px;
+      z-index: 60;
+      width: 58px;
+      height: 58px;
+      border-radius: 50%;
+      background: var(--yellow);
+      color: #000;
+      display: grid;
+      place-items: center;
+      text-decoration: none;
+      font-weight: 1000;
+      box-shadow: 0 14px 34px rgba(223,255,0,.25);
+    }
+
+    footer {
+      text-align: center;
+      padding: 42px 18px;
+      border-top: 1px solid rgba(255,255,255,.08);
+      color: #9d9d9d;
+    }
+    footer img { width: 76px; height: auto; display: block; margin: 0 auto 12px; filter: drop-shadow(0 0 12px rgba(223,255,0,.28)); }
+
+    @media (max-width: 780px) {
+      .nav-inner { align-items: flex-start; flex-direction: column; }
+      .nav-links { gap: 12px; }
+      .nav-links a { font-size: 12px; }
+      h1 { letter-spacing: -1px; }
+      .stats-row { grid-template-columns: repeat(2, 1fr); margin-top: 0; padding: 0 18px; }
+      .match { grid-template-columns: 1fr; text-align: center; }
+      .right { text-align: center; }
+    }
+    @media (max-width: 460px) {
+      .stats-row { grid-template-columns: 1fr; }
+      .brand span { font-size: 14px; }
+      .nav-cta { width: 100%; text-align: center; }
+      section { padding: 70px 16px; }
+      .floating-wa { width: 54px; height: 54px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="glow"></div>
+
+  <nav>
+    <div class="nav-inner">
+      <a class="brand" href="#inicio">
+        <img src="logo-abre-arena-500.png" alt="Logo ABRE ARENA" />
+        <span>ABRE ARENA</span>
+      </a>
+      <div class="nav-links">
+        <a href="#inicio">Início</a>
+        <a href="#atletas">Atletas</a>
+        <a href="#ranking">Ranking</a>
+        <a href="#regras">Regras</a>
+        <a href="#resultados">Resultados</a>
+        <a class="nav-cta" href="https://wa.me/5582996070665" target="_blank">WhatsApp</a>
+      </div>
+    </div>
+  </nav>
+
+  <header id="inicio">
+    <div class="hero">
+      <img class="hero-logo" src="logo-abre-arena-500.png" alt="Logo ABRE ARENA" />
+      <div class="badge">🎾 Ranking Oficial</div>
+      <h1><span>ABRE</span><strong>ARENA</strong></h1>
+      <p class="subtitle">A liga da galera. Cada jogo vale ponto, cada ponto muda o ranking e cada torneio aumenta a disputa.</p>
+      <div class="buttons">
+        <a class="btn btn-primary" href="#ranking">Ver Ranking</a>
+        <a class="btn btn-secondary" href="#regras">Critério de Pontos</a>
+      </div>
+    </div>
+  </header>
+
+  <div class="container">
+    <div class="stats-row">
+      <div class="stat-box"><strong>01</strong><small>Torneio realizado</small></div>
+      <div class="stat-box"><strong>09</strong><small>Duplas no ranking</small></div>
+      <div class="stat-box"><strong>18</strong><small>Atletas ativos</small></div>
+      <div class="stat-box"><strong>🔥</strong><small>Atualização semanal</small></div>
+    </div>
+    <div class="highlight-strip">
+      <p><strong>Temporada ABRE ARENA:</strong> regularidade, desempenho e foco até o final.</p>
+      <a class="btn btn-primary" href="#atletas">Ver destaques</a>
+    </div>
+  </div>
+
+  <section id="atletas">
+    <div class="container">
+      <div class="section-head">
+        <h2 class="section-title">Atletas <span>em destaque</span></h2>
+        <p class="section-sub">Cards oficiais para fotos, pontos, vitórias e saldo de cada dupla.</p>
+      </div>
+      <div class="athletes-grid">
+        <div class="athlete-card top1">
+          <div class="athlete-rank">🥇 1º</div>
+          <img class="athlete-photo" src="https://via.placeholder.com/500x500/111111/dfff00?text=VILLELA+%2F+BRENO" alt="Villela / Breno" />
+          <h3>Villela / Breno</h3>
+          <div class="athlete-points">150 pts</div>
+          <div class="athlete-stats"><div class="athlete-stat"><small>Vitórias</small><strong>6</strong></div><div class="athlete-stat"><small>Saldo</small><strong>+22</strong></div></div>
+        </div>
+        <div class="athlete-card">
+          <div class="athlete-rank">🥈 2º</div>
+          <img class="athlete-photo" src="https://via.placeholder.com/500x500/111111/dfff00?text=DILL+%2F+CARLOS" alt="Dill / Carlos" />
+          <h3>Dill / Carlos</h3>
+          <div class="athlete-points">110 pts</div>
+          <div class="athlete-stats"><div class="athlete-stat"><small>Vitórias</small><strong>4</strong></div><div class="athlete-stat"><small>Saldo</small><strong>+10</strong></div></div>
+        </div>
+        <div class="athlete-card">
+          <div class="athlete-rank">🥉 3º</div>
+          <img class="athlete-photo" src="https://via.placeholder.com/500x500/111111/dfff00?text=ISAAC+%2F+JUAREZ" alt="Isaac / Juarez" />
+          <h3>Isaac / Juarez</h3>
+          <div class="athlete-points">75 pts</div>
+          <div class="athlete-stats"><div class="athlete-stat"><small>Vitórias</small><strong>3</strong></div><div class="athlete-stat"><small>Saldo</small><strong>+6</strong></div></div>
+        </div>
+        <div class="athlete-card">
+          <div class="athlete-rank">4º</div>
+          <img class="athlete-photo" src="https://via.placeholder.com/500x500/111111/dfff00?text=SERGIO+%2F+RICARDO" alt="Sergio / Ricardo" />
+          <h3>Sergio / Ricardo</h3>
+          <div class="athlete-points">70 pts</div>
+          <div class="athlete-stats"><div class="athlete-stat"><small>Vitórias</small><strong>3</strong></div><div class="athlete-stat"><small>Saldo</small><strong>+2</strong></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="ranking">
+    <div class="container">
+      <div class="section-head">
+        <h2 class="section-title">Ranking <span>atual</span></h2>
+        <p class="section-sub">Classificação oficial do 1º Torneio ABRE ARENA.</p>
+      </div>
+      <div class="panel ranking-wrap">
+        <div class="ranking-toolbar">
+          <span>Atualizado após a final do 1º torneio</span>
+          <span class="ranking-pill">Critério: pontos + saldo</span>
+        </div>
+        <table>
+          <thead><tr><th>Posição</th><th>Dupla</th><th>Vitórias</th><th>Saldo</th><th>Pontos</th></tr></thead>
+          <tbody>
+            <tr class="top1-row"><td class="pos">🥇 1º</td><td>VILLELA / BRENO</td><td>6</td><td>+22</td><td>150</td></tr>
+            <tr><td class="pos">🥈 2º</td><td>DILL / CARLOS</td><td>4</td><td>+10</td><td>110</td></tr>
+            <tr><td class="pos">🥉 3º</td><td>ISAAC / JUAREZ</td><td>3</td><td>+6</td><td>75</td></tr>
+            <tr><td class="pos">4º</td><td>SERGIO / RICARDO</td><td>3</td><td>+2</td><td>70</td></tr>
+            <tr><td class="pos">5º</td><td>TELLES / PEDRO NASCIMENTO</td><td>1</td><td>0</td><td>45</td></tr>
+            <tr><td class="pos">6º</td><td>PEDRO / WALMAR</td><td>2</td><td>+4</td><td>45</td></tr>
+            <tr><td class="pos">7º</td><td>ADERSON / FABIO</td><td>1</td><td>+3</td><td>40</td></tr>
+            <tr><td class="pos">8º</td><td>JOCA / NELSÃO</td><td>0</td><td>-5</td><td>35</td></tr>
+            <tr><td class="pos">9º</td><td>TIAGO / DIOGO</td><td>0</td><td>-15</td><td>5</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section id="regras">
+    <div class="container">
+      <div class="section-head">
+        <h2 class="section-title">Critério de <span>pontos</span></h2>
+        <p class="section-sub">Arte oficial do regulamento para os torneios.</p>
+      </div>
+      <div class="panel rules-image">
+        <img src="arte-criterio-pontos.png" alt="Arte com critério de pontos do ranking ABRE ARENA" />
+      </div>
+    </div>
+  </section>
+
+  <section id="resultados">
+    <div class="container">
+      <div class="section-head">
+        <h2 class="section-title">Últimos <span>resultados</span></h2>
+        <p class="section-sub">Finais e jogos decisivos do torneio.</p>
+      </div>
+      <div class="panel matches">
+        <div class="match"><strong>VILLELA / BRENO</strong><span class="score">6 x 4</span><strong class="right">DILL / CARLOS</strong></div>
+        <div class="match"><strong>VILLELA / BRENO</strong><span class="score">6 x 2</span><strong class="right">SERGIO / RICARDO</strong></div>
+        <div class="match"><strong>DILL / CARLOS</strong><span class="score">6 x 2</span><strong class="right">ISAAC / JUAREZ</strong></div>
+      </div>
+      <div class="whatsapp">
+        <h2>Entre no grupo</h2>
+        <p>Receba datas dos torneios, rankings e novidades da ABRE ARENA.</p>
+        <a href="https://wa.me/5582996070665" target="_blank">Chamar no WhatsApp</a>
+      </div>
+    </div>
+  </section>
+
+  <a class="floating-wa" href="https://wa.me/5582996070665" target="_blank" aria-label="Chamar no WhatsApp">WA</a>
+
+  <footer>
+    <img src="logo-abre-arena-500.png" alt="Logo ABRE ARENA" />
+    © 2026 ABRE ARENA — Ranking oficial de Beach Tennis<br />
+    www.abrearena.com.br
+  </footer>
+</body>
+</html>

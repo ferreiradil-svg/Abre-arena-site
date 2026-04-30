@@ -143,7 +143,12 @@
     function cardAtleta(atleta,pequeno=false){
       return `<div class="athlete-card ${pequeno?"athlete-card-small":""} ${atleta.posicao===1?"top1":""}" onclick="abrirModal('${String(atleta.jogador).replace(/'/g,"\\'")}')">
         <div class="athlete-rank">${medal(atleta.posicao)}</div>
-        <img class="athlete-photo" src="${fotoAtleta(atleta.jogador)}" onerror="this.src='https://via.placeholder.com/500x500/111111/dfff00?text=${encodeURIComponent(atleta.jogador)}'" alt="${atleta.jogador}" />
+        <img 
+  class="athlete-photo" 
+  src="fotos/${r.jogador}.jpg" 
+  alt="${r.jogador}"
+  onerror="this.onerror=null; this.src='fotos/padrao.jpg';"
+/>
         <h3>${atleta.jogador}</h3>
         <div class="athlete-points">${atleta.pontos} pts</div>
         <div class="athlete-stats"><div class="athlete-stat"><small>Vitórias</small><strong>${atleta.vitorias}</strong></div><div class="athlete-stat"><small>Saldo</small><strong>${atleta.saldo>0?"+"+atleta.saldo:atleta.saldo}</strong></div></div>

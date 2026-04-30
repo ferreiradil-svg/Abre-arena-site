@@ -596,7 +596,7 @@
       grid.innerHTML = ranking.slice(0, 4).map((r, i) => `
         <div class="athlete-card ${i === 0 ? "top1" : ""}">
           <div class="athlete-rank">${medal(r.posicao || i + 1)}</div>
-          <img class="athlete-photo" src="https://via.placeholder.com/500x500/111111/dfff00?text=${encodeURIComponent(r.jogador)}" alt="${r.jogador}" />
+          <img class="athlete-photo" src="fotos/${r.jogador.toLowerCase().replace(/ /g,'')}.jpg" alt="${r.jogador}" />
           <h3>${r.jogador}</h3>
           <div class="athlete-points">${r.pontos} pts</div>
           <div class="athlete-stats">

@@ -71,7 +71,17 @@
     ];
 
     function normalizar(texto){return String(texto||"").normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase().trim()}
-    function fotoAtleta(nome){const arquivo=String(nome).normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase().replace(/[^a-z0-9]/g,"");return `fotos/${arquivo}.jpg`}
+    function fotoAtleta(nome){
+
+  const chave = nome
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/\s/g,"")
+    .replace(/[^\w]/g,"");
+
+  return `fotos/${chave}.jpg`;
+}
     function medal(pos){if(pos===1)return"🥇 1º";if(pos===2)return"🥈 2º";if(pos===3)return"🥉 3º";return `${pos}º`}
 
     function getRankedList(lista){

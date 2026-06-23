@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ABRE ARENA | Ranking Oficial</title>
+  <meta name="description" content="Ranking oficial ABRE ARENA de Beach Tennis." />
+  <link rel="icon" href="logo-abre-arena-500.png" />
+  <style>
+    *{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}
+    :root{--yellow:#dfff00;--line:rgba(223,255,0,.28);--muted:#b8b8b8;--shadow:0 24px 80px rgba(0,0,0,.58)}
+    body{font-family:Arial,Helvetica,sans-serif;background:radial-gradient(circle at 18% 8%,rgba(223,255,0,.12),transparent 30%),linear-gradient(180deg,#050505,#090909 50%,#050505);color:#fff;line-height:1.5;overflow-x:hidden}
+    a{text-decoration:none;color:inherit}.glow{position:fixed;inset:-20%;background:radial-gradient(circle,rgba(223,255,0,.055),transparent 35%);pointer-events:none;z-index:-1;animation:floatGlow 8s ease-in-out infinite alternate}@keyframes floatGlow{from{transform:translate(-5%,-3%)}to{transform:translate(5%,3%)}}
+    nav{position:fixed;top:0;left:0;width:100%;z-index:80;background:rgba(5,5,5,.84);backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}
+    .nav-inner{max-width:1180px;margin:auto;padding:12px 18px;display:flex;align-items:center;justify-content:space-between;gap:18px}.brand{display:flex;align-items:center;gap:10px;font-weight:1000;letter-spacing:.8px}.brand img{width:52px;height:52px;object-fit:contain;filter:drop-shadow(0 0 14px rgba(223,255,0,.38))}
+    .nav-links{display:flex;align-items:center;gap:18px;flex-wrap:wrap}.nav-links a{color:#e9e9e9;font-size:13px;font-weight:900;text-transform:uppercase;letter-spacing:.7px;transition:.2s}.nav-links a:hover{color:var(--yellow)}.nav-cta{background:var(--yellow);color:#000!important;padding:10px 15px;border-radius:999px;box-shadow:0 0 24px rgba(223,255,0,.18)}
+    header{min-height:100vh;padding:116px 18px 72px;display:grid;place-items:center;text-align:center;background:linear-gradient(rgba(0,0,0,.62),rgba(0,0,0,.94)),radial-gradient(circle at center top,rgba(223,255,0,.20),transparent 42%);position:relative;overflow:hidden}
+    header:before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);background-size:48px 48px;mask-image:linear-gradient(to bottom,rgba(0,0,0,.85),transparent 82%)}
+    .hero{max-width:980px;position:relative;z-index:2}.hero-logo{width:min(230px,52vw);height:auto;margin:0 auto 22px;filter:drop-shadow(0 0 30px rgba(223,255,0,.46));animation:pulseLogo 3.4s ease-in-out infinite}@keyframes pulseLogo{0%,100%{transform:scale(1)}50%{transform:scale(1.025)}}
+    .badge{display:inline-flex;padding:9px 18px;border:1px solid var(--line);border-radius:999px;color:var(--yellow);background:rgba(223,255,0,.06);font-weight:1000;letter-spacing:1px;margin-bottom:16px;text-transform:uppercase}
+    h1{font-size:clamp(50px,10vw,116px);line-height:.88;text-transform:uppercase;letter-spacing:-3px;text-shadow:0 0 38px rgba(223,255,0,.15)}h1 span{display:block;color:#fff}h1 strong{color:var(--yellow)}
+    .subtitle{max-width:780px;margin:24px auto 32px;font-size:clamp(18px,3vw,26px);color:#e6e6e6}.buttons{display:flex;justify-content:center;gap:14px;flex-wrap:wrap}
+    .btn{display:inline-flex;align-items:center;justify-content:center;min-height:50px;padding:14px 23px;border-radius:16px;font-weight:1000;text-transform:uppercase;transition:.22s;cursor:pointer;border:none;font-family:inherit}.btn-primary{background:var(--yellow);color:#000;box-shadow:0 16px 32px rgba(223,255,0,.18)}.btn-secondary{border:1px solid var(--line);color:var(--yellow);background:rgba(255,255,255,.03)}.btn:hover{transform:translateY(-3px)}
+    section{padding:88px 18px}.container{max-width:1180px;margin:auto}.section-head{text-align:center;margin-bottom:36px}.section-title{font-size:clamp(32px,5vw,54px);text-transform:uppercase;letter-spacing:-1px;line-height:1}.section-title span{color:var(--yellow)}.section-sub{color:var(--muted);margin-top:12px;font-size:17px}
+    .stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:-42px;position:relative;z-index:5}.stat-box{background:linear-gradient(180deg,rgba(255,255,255,.055),rgba(255,255,255,.02));border:1px solid var(--line);border-radius:22px;padding:22px;text-align:center;box-shadow:var(--shadow);backdrop-filter:blur(10px)}.stat-box strong{display:block;color:var(--yellow);font-size:34px;line-height:1}.stat-box small{color:var(--muted);text-transform:uppercase;font-weight:900}
+    .highlight-strip{margin-top:28px;padding:18px;border-radius:22px;background:linear-gradient(90deg,rgba(223,255,0,.10),rgba(255,255,255,.03));border:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}.highlight-strip strong{color:var(--yellow);text-transform:uppercase}
+    .controls{display:grid;grid-template-columns:1.4fr .8fr .8fr;gap:12px;margin-bottom:26px}.control{background:#0c0c0c;border:1px solid rgba(255,255,255,.10);color:#fff;border-radius:16px;padding:14px 16px;outline:none;font-size:15px}.control:focus{border-color:var(--yellow)}
+    .athletes-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:22px}.all-athletes-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:16px;margin-top:24px}.athlete-card{position:relative;overflow:hidden;background:linear-gradient(180deg,#171717,#070707);border:1px solid var(--line);border-radius:28px;padding:16px;text-align:center;box-shadow:var(--shadow);transition:.25s;cursor:pointer}.athlete-card:hover{transform:translateY(-6px);border-color:var(--yellow)}.athlete-card.top1{border:2px solid var(--yellow)}.athlete-rank{position:absolute;top:14px;left:14px;background:var(--yellow);color:#000;font-weight:1000;padding:7px 12px;border-radius:999px;z-index:2}.athlete-photo{width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:22px;background:#161616;border:1px solid rgba(255,255,255,.09)}.athlete-card h3{margin-top:14px;text-transform:uppercase;font-size:20px}.athlete-points{color:var(--yellow);font-size:30px;font-weight:1000}.athlete-stats{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:14px}.athlete-stat{background:#0d0d0d;border:1px solid #242424;border-radius:14px;padding:10px}.athlete-stat small{display:block;color:var(--muted);font-size:11px;text-transform:uppercase}.athlete-stat strong{font-size:18px}.athlete-card-small{border-radius:22px;padding:12px}.athlete-card-small .athlete-rank{font-size:12px;padding:5px 9px}.athlete-card-small h3{font-size:15px}.athlete-card-small .athlete-points{font-size:22px}.athlete-card-small .athlete-stats{display:none}
+    .panel{background:linear-gradient(180deg,#151515,#080808);border:1px solid var(--line);border-radius:28px;padding:22px;box-shadow:var(--shadow)}.ranking-toolbar{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:16px;color:var(--muted);font-size:14px}.ranking-pill{color:#000;background:var(--yellow);font-weight:1000;padding:7px 12px;border-radius:999px}.ranking-wrap{overflow-x:auto}table{width:100%;border-collapse:collapse;min-width:650px}th,td{padding:16px 12px;border-bottom:1px solid rgba(255,255,255,.08);text-align:left}th{color:var(--yellow);text-transform:uppercase;font-size:13px;letter-spacing:.7px}td:last-child,th:last-child{text-align:right}.pos{color:var(--yellow);font-weight:1000}.top1-row{background:rgba(223,255,0,.10)}
+    .rules-image{text-align:center}.rules-image img{width:100%;max-width:760px;border-radius:28px;border:1px solid var(--line);box-shadow:0 25px 80px rgba(0,0,0,.62)}
+    .matches{display:grid;gap:14px}.match{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:14px;padding:16px;border-radius:18px;background:#0d0d0d;border:1px solid rgba(255,255,255,.09)}.match-phase{grid-column:1/-1;text-align:center;font-size:12px;color:#aaa;text-transform:uppercase;letter-spacing:.7px}.score{color:var(--yellow);font-size:24px;font-weight:1000}.right{text-align:right}
+    .modal{position:fixed;inset:0;z-index:120;display:none;align-items:center;justify-content:center;padding:18px;background:rgba(0,0,0,.78);backdrop-filter:blur(12px)}.modal.open{display:flex}.modal-card{width:min(920px,100%);display:grid;grid-template-columns:340px 1fr;gap:22px;background:linear-gradient(180deg,#161616,#080808);border:1px solid var(--line);border-radius:30px;padding:22px;box-shadow:var(--shadow);position:relative}.modal-close{position:absolute;right:14px;top:14px;width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:#000;color:var(--yellow);cursor:pointer;font-weight:1000}.modal-photo{width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:24px}.modal h3{font-size:clamp(30px,6vw,52px);text-transform:uppercase;line-height:1}.modal-points{color:var(--yellow);font-size:34px;font-weight:1000;margin:8px 0 18px}.modal-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.modal-stat{background:#0d0d0d;border:1px solid #242424;border-radius:14px;padding:14px}.modal-stat small{color:var(--muted);text-transform:uppercase;display:block;font-size:12px}.modal-stat strong{font-size:22px}
+    .whatsapp{margin-top:30px;border-radius:30px;padding:40px 22px;background:linear-gradient(135deg,var(--yellow),#f5ff65);color:#000;text-align:center;box-shadow:0 18px 48px rgba(223,255,0,.16)}.whatsapp h2{font-size:clamp(28px,5vw,44px);text-transform:uppercase;line-height:1}.whatsapp p{margin-top:10px;font-weight:700}.whatsapp a{display:inline-flex;margin-top:18px;padding:14px 24px;border-radius:16px;background:#000;color:var(--yellow);font-weight:1000;text-transform:uppercase}.floating-wa{position:fixed;right:18px;bottom:18px;z-index:60;width:58px;height:58px;border-radius:50%;background:var(--yellow);color:#000;display:grid;place-items:center;font-weight:1000;box-shadow:0 14px 34px rgba(223,255,0,.25)}
+    footer{text-align:center;padding:42px 18px;border-top:1px solid rgba(255,255,255,.08);color:#9d9d9d}footer img{width:76px;height:auto;display:block;margin:0 auto 12px;filter:drop-shadow(0 0 12px rgba(223,255,0,.28))}
+    @media(max-width:780px){.nav-inner{align-items:flex-start;flex-direction:column}.nav-links{gap:12px}.nav-links a{font-size:12px}h1{letter-spacing:-1px}.stats-row{grid-template-columns:repeat(2,1fr);margin-top:0;padding:0 18px}.controls{grid-template-columns:1fr}.match{grid-template-columns:1fr;text-align:center}.match-phase{grid-column:auto}.right{text-align:center}.modal-card{grid-template-columns:1fr;max-height:90vh;overflow:auto}}
+    @media(max-width:460px){.stats-row{grid-template-columns:1fr}.brand span{font-size:14px}.nav-cta{width:100%;text-align:center}section{padding:70px 16px}.floating-wa{width:54px;height:54px}}
+  </style>
+</head>
+<body>
+  <div class="glow"></div>
+  <nav><div class="nav-inner"><a class="brand" href="#inicio"><img src="logo-abre-arena-500.png" alt="Logo ABRE ARENA" /><span>ABRE ARENA</span></a><div class="nav-links"><a href="#inicio">Início</a><a href="#atletas">Atletas</a><a href="#ranking">Ranking</a><a href="#regras">Regras</a><a href="#resultados">Resultados</a><a class="nav-cta" href="https://wa.me/5582996070665" target="_blank">WhatsApp</a></div></div></nav>
+  <header id="inicio"><div class="hero"><img class="hero-logo" src="logo-abre-arena-500.png" alt="Logo ABRE ARENA" /><div class="badge">🎾 Ranking Oficial</div><h1><span>ABRE</span><strong>ARENA</strong></h1><p class="subtitle">A liga da galera. Cada jogo vale ponto, cada ponto muda o ranking e cada torneio aumenta a disputa.</p><div class="buttons"><a class="btn btn-primary" href="#ranking">Ver Ranking</a><a class="btn btn-secondary" href="#regras">Critério de Pontos</a></div></div></header>
+
+  <div class="container"><div class="stats-row"><div class="stat-box"><strong id="stat-etapas">01</strong><small>Torneio realizado</small></div><div class="stat-box"><strong id="stat-jogadores">--</strong><small>Atletas no ranking</small></div><div class="stat-box"><strong id="stat-lider">🏆</strong><small>Líder atual</small></div><div class="stat-box"><strong>🔥</strong><small>Atualização automática</small></div></div><div class="highlight-strip"><p><strong>Temporada ABRE ARENA:</strong> regularidade, desempenho e foco até o final.</p><a class="btn btn-primary" href="#atletas">Ver destaques</a></div></div>
+
+  <section id="atletas"><div class="container"><div class="section-head"><h2 class="section-title">Atletas <span>em destaque</span></h2><p class="section-sub">Top 4 do ranking com cards maiores.</p></div><div class="athletes-grid" id="featured-athletes-grid"></div><div class="section-head" style="margin-top:64px;"><h2 class="section-title">Todos os <span>atletas</span></h2><p class="section-sub">Busque, filtre e clique no atleta para ver detalhes.</p></div><div class="controls"><input class="control" id="search-athlete" placeholder="Buscar atleta..." /><select class="control" id="filter-athlete"><option value="todos">Todos</option><option value="top10">Top 10</option><option value="campeoes">Campeões</option></select><select class="control" id="sort-athlete"><option value="ranking">Ordenar por ranking</option><option value="nome">Ordenar por nome</option><option value="saldo">Ordenar por saldo</option></select></div><div class="all-athletes-grid" id="all-athletes-grid"></div><div class="section-head" style="margin-top:60px;"><h2 class="section-title">Comunidade <span>ABRE ARENA</span></h2><p class="section-sub">Todos os membros cadastrados do grupo.</p></div><div class="all-athletes-grid" id="community-athletes-grid"></div></div></section>
+
+  <section id="ranking"><div class="container"><div class="section-head"><h2 class="section-title">Ranking <span>atual</span></h2><p class="section-sub">Empates aparecem na mesma posição. Saldo e vitórias ficam como informação visual.</p></div><div class="panel ranking-wrap"><div class="ranking-toolbar"><span id="ranking-status">Carregando ranking da planilha...</span><span class="ranking-pill">Critério: pontos + saldo</span></div><table><thead><tr><th>Posição</th><th>Atleta</th><th>Vitórias</th><th>Saldo</th><th>Pontos</th></tr></thead><tbody id="ranking-body"></tbody></table></div></div></section>
+
+  <section id="regras"><div class="container"><div class="section-head"><h2 class="section-title">Critério de <span>pontos</span></h2><p class="section-sub">Arte oficial do regulamento para os torneios.</p></div><div class="panel rules-image"><img src="arte-criterio-pontos.png" alt="Arte com critério de pontos do ranking ABRE ARENA" /></div></div></section>
+
+  <section id="resultados"><div class="container"><div class="section-head"><h2 class="section-title">Últimos <span>resultados</span></h2><p class="section-sub">Dados puxados automaticamente da aba ENTRADA.</p></div><div class="panel matches" id="results-list"></div><div class="whatsapp"><h2>Entre no grupo</h2><p>Receba datas dos torneios, rankings e novidades da ABRE ARENA.</p><a href="https://wa.me/5582996070665" target="_blank">Chamar no WhatsApp</a></div></div></section>
+
+  <div class="modal" id="athlete-modal"><div class="modal-card"><button class="modal-close" onclick="fecharModal()">×</button><img class="modal-photo" id="modal-photo" src="" alt="" /><div><h3 id="modal-name"></h3><div class="modal-points" id="modal-points"></div><div class="modal-grid"><div class="modal-stat"><small>Posição</small><strong id="modal-position"></strong></div><div class="modal-stat"><small>Vitórias</small><strong id="modal-wins"></strong></div><div class="modal-stat"><small>Saldo</small><strong id="modal-saldo"></strong></div><div class="modal-stat"><small>Títulos</small><strong id="modal-titles"></strong></div></div></div></div></div>
+
+  <a class="floating-wa" href="https://wa.me/5582996070665" target="_blank" aria-label="Chamar no WhatsApp">WA</a>
+  <footer><img src="logo-abre-arena-500.png" alt="Logo ABRE ARENA" />© 2026 ABRE ARENA — Ranking oficial de Beach Tennis<br />www.abrearena.com.br</footer>
+
+  <script>
+    const RANKING_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTzwS83NKMNvbUPWsy3ENScJovhs-sT9aILVlrGPfYIryddS882bCWI_83wJRi9uegmnuzjDkiyzL_M/pub?gid=235504914&single=true&output=csv";
+    const ENTRADA_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTzwS83NKMNvbUPWsy3ENScJovhs-sT9aILVlrGPfYIryddS882bCWI_83wJRi9uegmnuzjDkiyzL_M/pub?gid=1383970385&single=true&output=csv";
+    const ATLETAS_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTzwS83NKMNvbUPWsy3ENScJovhs-sT9aILVlrGPfYIryddS882bCWI_83wJRi9uegmnuzjDkiyzL_M/pub?gid=391289753&single=true&output=csv";
+
+    let atletas = [];
+    let resultados = [];
+    let comunidade = [];
+
+    const atletasFallback = [
+      {jogador:"VILLELA",pontos:230,vitorias:6,saldo:22,titulos:1},
+      {jogador:"BRENO",pontos:230,vitorias:6,saldo:22,titulos:1},
+      {jogador:"DIL",pontos:160,vitorias:4,saldo:1,titulos:0},
+      {jogador:"CARLOS F",pontos:160,vitorias:4,saldo:1,titulos:0}
+    ];
+
+    function normalizar(texto){return String(texto||"").normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase().trim()}
+    function fotoAtleta(nome){
+
+  const chave = nome
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/\s/g,"")
+    .replace(/[^\w]/g,"");
+
+  return `fotos/${chave}.jpg`;
+}
+    function medal(pos){if(pos===1)return"🥇 1º";if(pos===2)return"🥈 2º";if(pos===3)return"🥉 3º";return `${pos}º`}
+
+    function getRankedList(lista){
+      const ordenado=[...lista].sort((a,b)=>Number(b.pontos)-Number(a.pontos)||Number(b.saldo)-Number(a.saldo)||Number(b.vitorias)-Number(a.vitorias));
+      let ultimaPontuacao=null;let posicaoAtual=0;
+      return ordenado.map((atleta,index)=>{const pontos=Number(atleta.pontos)||0;if(pontos!==ultimaPontuacao){posicaoAtual=index+1;ultimaPontuacao=pontos}return{...atleta,posicao:posicaoAtual}})
+    }
+
+    function csvToRows(csv){
+      const rows=[];let row=[],value="",quote=false;
+      for(let i=0;i<csv.length;i++){const c=csv[i],n=csv[i+1];
+        if(c==='"'&&quote&&n==='"'){value+='"';i++;continue}
+        if(c==='"'){quote=!quote;continue}
+        if(c===","&&!quote){row.push(value);value="";continue}
+        if((c==="\n"||c==="\r")&&!quote){if(value||row.length){row.push(value);rows.push(row);row=[];value=""}if(c==="\r"&&n==="\n")i++;continue}
+        value+=c
+      }
+      if(value||row.length){row.push(value);rows.push(row)}
+      return rows
+    }
+
+    function rowsToObjects(rows){
+      const headerIndex=rows.findIndex(r=>r.some(c=>normalizar(c).includes("jogador")));
+      if(headerIndex===-1)return[];
+      const headers=rows[headerIndex].map(normalizar);
+      return rows.slice(headerIndex+1).filter(r=>r.some(Boolean)).map(r=>{const obj={};headers.forEach((h,i)=>obj[h]=(r[i]||"").trim());return obj})
+    }
+
+    function firstValue(obj, keys, fallback=""){
+      for (const key of keys) {
+        const k = normalizar(key);
+        if (obj[k] !== undefined && obj[k] !== "") return obj[k];
+      }
+      return fallback;
+    }
+
+    function mapRanking(obj){
+      const jogador = firstValue(obj, ["Jogador", "Atleta", "Nome"]);
+      const pontos = Number(String(firstValue(obj, ["Pontos", "Pontos Totais", "Pontos Ranking"], "0")).replace(",", "."));
+      const vitorias = Number(String(firstValue(obj, ["Vitorias", "Vitórias", "Titulos", "Títulos"], "0")).replace(",", "."));
+      const saldo = Number(String(firstValue(obj, ["Saldo", "Saldo Total"], "0")).replace(",", "."));
+      const titulos = Number(String(firstValue(obj, ["Titulos", "Títulos"], "0")).replace(",", "."));
+      return {jogador, pontos, vitorias, saldo, titulos};
+    }
+
+    
+    function mapAtletas(obj){
+      return {
+        nome: firstValue(obj, ["Nome"]),
+        apelido: firstValue(obj, ["Apelido"]),
+        cidade: firstValue(obj, ["Cidade"]),
+        foto: firstValue(obj, ["Foto"]),
+        status: firstValue(obj, ["Status"])
+      };
+    }
+
+function mapEntrada(obj){
+      const jogador = firstValue(obj, ["Jogador", "Atleta", "Nome"]);
+      const fase = firstValue(obj, ["Fase / Resultado", "Fase", "Resultado"]);
+      const pontosPro = firstValue(obj, ["Pontos Pro", "Pontos Pró", "Pro", "Pró"], "");
+      const pontosContra = firstValue(obj, ["Pontos Contra", "Contra"], "");
+      const pontosRanking = firstValue(obj, ["Pontos Ranking", "Pontos", "Pontuação"], "");
+      const etapa = firstValue(obj, ["Etapa", "Torneio"], "");
+      const data = firstValue(obj, ["Data"], "");
+      return {jogador, fase, pontosPro, pontosContra, pontosRanking, etapa, data};
+    }
+
+    async function carregarCsv(url, mapper, fallback=[]){
+      try {
+        const response = await fetch(url + (url.includes("?") ? "&" : "?") + "cache=" + Date.now());
+        const text = await response.text();
+        const objetos = rowsToObjects(csvToRows(text)).map(mapper).filter(x => x.jogador);
+        return objetos.length ? objetos : fallback;
+      } catch (e) {
+        console.warn("Erro ao carregar CSV:", e);
+        return fallback;
+      }
+    }
+
+function cardAtleta(atleta, pequeno=false){
+  return `
+    <div class="athlete-card ${pequeno ? "athlete-card-small" : ""} ${atleta.posicao === 1 ? "top1" : ""}" onclick="abrirModal('${String(atleta.jogador).replace(/'/g,"\\'")}')">
+      <div class="athlete-rank">${medal(atleta.posicao)}</div>
+
+      <img 
+        class="athlete-photo" 
+        src="${fotoAtleta(atleta.jogador)}" 
+        onerror="this.onerror=null; this.src='fotos/padrao.jpg';" 
+        alt="${atleta.jogador}" 
+      />
+
+      <h3>${atleta.jogador}</h3>
+      <div class="athlete-points">${atleta.pontos} pts</div>
+
+      <div class="athlete-stats">
+        <div class="athlete-stat">
+          <small>Vitórias</small>
+          <strong>${atleta.vitorias}</strong>
+        </div>
+        <div class="athlete-stat">
+          <small>Saldo</small>
+          <strong>${atleta.saldo > 0 ? "+" + atleta.saldo : atleta.saldo}</strong>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+    function filtrarAtletas(ranking){
+      const busca=normalizar(document.getElementById("search-athlete").value);
+      const filtro=document.getElementById("filter-athlete").value;
+      const ordem=document.getElementById("sort-athlete").value;
+      let lista=[...ranking];
+      if(busca)lista=lista.filter(a=>normalizar(a.jogador).includes(busca));
+      if(filtro==="top10")lista=lista.filter(a=>a.posicao<=10);
+      if(filtro==="campeoes")lista=lista.filter(a=>Number(a.titulos)>0);
+      if(ordem==="nome")lista.sort((a,b)=>a.jogador.localeCompare(b.jogador));
+      if(ordem==="saldo")lista.sort((a,b)=>Number(b.saldo)-Number(a.saldo));
+      return lista
+    }
+
+    function renderizarAtletas(){
+      const ranking=getRankedList(atletas);
+      document.getElementById("featured-athletes-grid").innerHTML=ranking.slice(0,4).map(a=>cardAtleta(a)).join("");
+      document.getElementById("all-athletes-grid").innerHTML=filtrarAtletas(ranking).map(a=>cardAtleta(a,true)).join("")
+    }
+
+    
+function renderizarComunidade(){
+  const el = document.getElementById("community-athletes-grid");
+  if(!el) return;
+  el.innerHTML = comunidade.map(a => `
+    <div class="athlete-card athlete-card-small">
+      <img class="athlete-photo"
+           src="fotos/${a.foto}"
+           onerror="this.onerror=null; this.src='fotos/padrao.jpg';"
+           alt="${a.apelido || a.nome}" />
+      <h3>${a.apelido || a.nome}</h3>
+    </div>
+  `).join("");
+}
+
+
+function renderizarRanking(){
+      const ranking=getRankedList(atletas);
+      document.getElementById("ranking-body").innerHTML=ranking.map(a=>`<tr class="${a.posicao===1?"top1-row":""}"><td class="pos">${medal(a.posicao)}</td><td>${a.jogador}</td><td>${a.vitorias}</td><td>${a.saldo>0?"+"+a.saldo:a.saldo}</td><td>${a.pontos}</td></tr>`).join("");
+      document.getElementById("ranking-status").textContent = "Ranking conectado à aba RANKING do Google Sheets";
+      document.getElementById("stat-jogadores").textContent=String(ranking.length).padStart(2,"0");
+      document.getElementById("stat-lider").textContent=ranking[0]?.jogador||"🏆"
+    }
+
+    function renderizarResultados(){
+      const lista = resultados.length ? resultados : atletas.slice(0, 8).map(a => ({jogador:a.jogador, fase:"Ranking", pontosPro:a.pontos, pontosContra:"pts", pontosRanking:a.pontos}));
+      document.getElementById("results-list").innerHTML = lista.slice(-12).reverse().map(r => `
+        <div class="match">
+          <strong>${r.jogador}</strong>
+          <span class="score">${r.pontosPro || "-"} x ${r.pontosContra || "-"}</span>
+          <strong class="right">${r.pontosRanking ? r.pontosRanking + " pts" : ""}</strong>
+          <div class="match-phase">${r.fase || ""} ${r.etapa ? " · Etapa " + r.etapa : ""} ${r.data ? " · " + r.data : ""}</div>
+        </div>
+      `).join("");
+    }
+
+    function abrirModal(nome){
+      const atleta=getRankedList(atletas).find(a=>a.jogador===nome);if(!atleta)return;
+      document.getElementById("modal-photo").src=fotoAtleta(atleta.jogador);
+      document.getElementById("modal-photo").onerror=function(){this.src=`https://via.placeholder.com/500x500/111111/dfff00?text=${encodeURIComponent(atleta.jogador)}`};
+      document.getElementById("modal-name").textContent=atleta.jogador;
+      document.getElementById("modal-points").textContent=`${atleta.pontos} pts`;
+      document.getElementById("modal-position").textContent=medal(atleta.posicao);
+      document.getElementById("modal-wins").textContent=atleta.vitorias;
+      document.getElementById("modal-saldo").textContent=atleta.saldo>0?"+"+atleta.saldo:atleta.saldo;
+      document.getElementById("modal-titles").textContent=atleta.titulos;
+      document.getElementById("athlete-modal").classList.add("open")
+    }
+    function fecharModal(){document.getElementById("athlete-modal").classList.remove("open")}
+
+    async function iniciar(){
+      atletas = await carregarCsv(RANKING_CSV_URL, mapRanking, atletasFallback);
+      resultados = await carregarCsv(ENTRADA_CSV_URL, mapEntrada, []);
+      comunidade = await carregarCsv(ATLETAS_CSV_URL, mapAtletas, []);
+      renderizarAtletas(); renderizarComunidade(); renderizarRanking(); renderizarResultados();
+      document.getElementById("search-athlete").addEventListener("input",renderizarAtletas);
+      document.getElementById("filter-athlete").addEventListener("change",renderizarAtletas);
+      document.getElementById("sort-athlete").addEventListener("change",renderizarAtletas)
+    }
+    iniciar();
+  </script>
+</body>
+</html>

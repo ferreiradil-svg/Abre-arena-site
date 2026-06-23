@@ -106,11 +106,36 @@
     }
 
     function rowsToObjects(rows){
-      const headerIndex=rows.findIndex(r=>r.some(c=>normalizar(c).includes("jogador")));
-      if(headerIndex===-1)return[];
-      const headers=rows[headerIndex].map(normalizar);
-      return rows.slice(headerIndex+1).filter(r=>r.some(Boolean)).map(r=>{const obj={};headers.forEach((h,i)=>obj[h]=(r[i]||"").trim());return obj})
-    }
+
+  const headerIndex = rows.findIndex(r =>
+    r.some(c => {
+      const v = normalizar(c);
+      return (
+        v.includes("jogador") ||
+        v.includes("nome")
+      );
+    })
+  );
+
+  if(headerIndex === -1) return [];
+
+  const headers = rows[headerIndex].map(normalizar);
+
+  return rows
+    .slice(headerIndex + 1)
+    .filter(r => r.some(Boolean))
+    .map(r => {
+
+      const obj = {};
+
+      headers.forEach((h,i)=>{
+        obj[h] = (r[i] || "").trim();
+      });
+
+      return obj;
+
+    });
+}
 
     function firstValue(obj, keys, fallback=""){
       for (const key of keys) {

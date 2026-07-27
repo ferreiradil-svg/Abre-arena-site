@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ABRE ARENA 2.0</title>
+<meta name="description" content="Portal oficial ABRE ARENA: ranking, atletas, torneios e resultados.">
+<link rel="icon" href="logo-abre-arena-500.png">
+<style>
+:root{--lime:#e8ff00;--lime2:#b5d800;--black:#050505;--panel:#111;--muted:#aaa;--line:rgba(232,255,0,.22);--shadow:0 25px 80px rgba(0,0,0,.55)}
+*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}body{font-family:Arial,Helvetica,sans-serif;background:#050505;color:#fff;line-height:1.5;overflow-x:hidden}
+body:before{content:"";position:fixed;inset:0;z-index:-2;background:radial-gradient(circle at 15% 5%,rgba(232,255,0,.12),transparent 25%),radial-gradient(circle at 90% 30%,rgba(232,255,0,.08),transparent 25%),linear-gradient(180deg,#050505,#0b0b0b 55%,#050505)}
+a{color:inherit;text-decoration:none}button,input,select{font:inherit}
+nav{position:fixed;top:0;left:0;width:100%;z-index:80;background:rgba(5,5,5,.88);backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}
+.nav{max-width:1240px;margin:auto;padding:12px 18px;display:flex;align-items:center;justify-content:space-between;gap:20px}.brand{display:flex;align-items:center;gap:10px;font-weight:1000}.brand img{width:52px;height:52px;object-fit:contain;filter:drop-shadow(0 0 14px rgba(232,255,0,.35))}
+.menu{display:flex;gap:18px;flex-wrap:wrap;align-items:center}.menu a{font-size:13px;text-transform:uppercase;font-weight:900;letter-spacing:.7px}.menu a:hover{color:var(--lime)}.cta{background:var(--lime);color:#000!important;padding:10px 16px;border-radius:999px}
+.hero{min-height:100vh;padding:120px 18px 80px;display:grid;place-items:center;position:relative;overflow:hidden;text-align:center}.hero:before{content:"";position:absolute;inset:0;background:linear-gradient(rgba(0,0,0,.4),rgba(0,0,0,.9)),linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px);background-size:auto,50px 50px,50px 50px}
+.hero-inner{position:relative;z-index:2;max-width:1000px}.hero img{width:min(240px,52vw);filter:drop-shadow(0 0 30px rgba(232,255,0,.45))}.eyebrow{display:inline-block;margin:18px 0;padding:8px 16px;border:1px solid var(--line);border-radius:999px;color:var(--lime);font-weight:1000;text-transform:uppercase}h1{font-size:clamp(48px,10vw,112px);line-height:.88;text-transform:uppercase;letter-spacing:-4px}h1 strong{color:var(--lime)}.hero p{max-width:760px;margin:22px auto 30px;color:#ddd;font-size:clamp(18px,2.8vw,25px)}.actions{display:flex;justify-content:center;gap:12px;flex-wrap:wrap}.btn{display:inline-flex;align-items:center;justify-content:center;padding:14px 22px;border-radius:15px;font-weight:1000;text-transform:uppercase;transition:.2s;border:1px solid var(--line)}.btn:hover{transform:translateY(-3px)}.btn-primary{background:var(--lime);color:#000}.btn-dark{background:rgba(255,255,255,.03);color:var(--lime)}
+.container{max-width:1240px;margin:auto}section{padding:88px 18px}.section-head{text-align:center;margin-bottom:34px}.section-head h2{font-size:clamp(32px,5vw,56px);text-transform:uppercase;line-height:1}.section-head h2 span{color:var(--lime)}.section-head p{color:var(--muted);margin-top:10px}
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:-50px;position:relative;z-index:4;padding:0 18px}.kpi{background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.02));border:1px solid var(--line);border-radius:22px;padding:24px;text-align:center;box-shadow:var(--shadow)}.kpi strong{display:block;color:var(--lime);font-size:34px;line-height:1.1}.kpi small{color:var(--muted);font-weight:900;text-transform:uppercase}
+.latest{display:grid;grid-template-columns:1.15fr .85fr;gap:22px}.panel{background:linear-gradient(180deg,#151515,#090909);border:1px solid var(--line);border-radius:28px;padding:24px;box-shadow:var(--shadow)}.champion-card{min-height:370px;display:flex;flex-direction:column;justify-content:flex-end;background:radial-gradient(circle at 70% 10%,rgba(232,255,0,.22),transparent 35%),linear-gradient(145deg,#151515,#050505);position:relative;overflow:hidden}.champion-card:before{content:"🏆";position:absolute;right:25px;top:20px;font-size:100px;opacity:.16}.champion-card .tag{color:var(--lime);font-weight:1000;text-transform:uppercase}.champion-card h3{font-size:clamp(34px,6vw,62px);text-transform:uppercase;line-height:.95;margin:8px 0}.champion-card p{color:#ccc}.meta{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}.chip{padding:8px 12px;border-radius:999px;background:#0a0a0a;border:1px solid var(--line);font-size:13px}
+.tournament-list{display:grid;gap:12px}.tournament-mini{padding:16px;background:#0c0c0c;border:1px solid rgba(255,255,255,.08);border-radius:18px;cursor:pointer;transition:.2s}.tournament-mini:hover{border-color:var(--lime);transform:translateX(4px)}.tournament-mini strong{display:block;color:var(--lime)}.tournament-mini small{color:var(--muted)}
+.rank-table{overflow-x:auto}table{width:100%;border-collapse:collapse;min-width:760px}th,td{padding:15px 12px;border-bottom:1px solid rgba(255,255,255,.08);text-align:left}th{color:var(--lime);text-transform:uppercase;font-size:12px;letter-spacing:.8px}td:last-child,th:last-child{text-align:right}.leader{background:rgba(232,255,0,.08)}.position{color:var(--lime);font-weight:1000}
+.top10-featured{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.top10-featured .athlete{padding:16px}
+.top10-featured .athlete img{aspect-ratio:1/1}
+.top10-featured .athlete h3{font-size:20px}
+.top10-featured .athlete .pts{font-size:28px}
+.top10-rest{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:18px}
+.top10-small{display:grid;grid-template-columns:82px 1fr auto;align-items:center;gap:12px;background:linear-gradient(180deg,#151515,#090909);border:1px solid var(--line);border-radius:18px;padding:10px 14px;cursor:pointer;transition:.2s}
+.top10-small:hover{transform:translateY(-3px);border-color:var(--lime)}
+.top10-small img{width:82px;height:82px;object-fit:cover;border-radius:14px;background:#111}
+.top10-small h3{font-size:15px;text-transform:uppercase}
+.top10-small .small-meta{color:var(--muted);font-size:12px}
+.top10-small .small-points{color:var(--lime);font-size:20px;font-weight:1000;text-align:right}
+.top10-small .small-position{display:block;color:#fff;font-size:12px}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:18px}.athlete{position:relative;background:linear-gradient(180deg,#171717,#080808);border:1px solid var(--line);border-radius:24px;padding:14px;text-align:center;cursor:pointer;transition:.22s;box-shadow:var(--shadow)}.athlete:hover{transform:translateY(-5px);border-color:var(--lime)}.athlete img{width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:18px;background:#111}.athlete h3{margin-top:12px;text-transform:uppercase}.athlete .pts{color:var(--lime);font-size:24px;font-weight:1000}.athlete .rank{position:absolute;top:22px;left:22px;background:var(--lime);color:#000;font-weight:1000;padding:6px 10px;border-radius:999px}.athlete .city{color:var(--muted);font-size:13px}
+.controls{display:grid;grid-template-columns:1fr .7fr;gap:12px;margin-bottom:24px}.control{background:#0b0b0b;color:#fff;border:1px solid rgba(255,255,255,.12);border-radius:15px;padding:14px;outline:none}.control:focus{border-color:var(--lime)}
+.tournaments-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px}.tournament-card{background:linear-gradient(180deg,#171717,#090909);border:1px solid var(--line);border-radius:24px;padding:22px;cursor:pointer;transition:.2s}.tournament-card:hover{transform:translateY(-5px);border-color:var(--lime)}.tournament-card .id{color:var(--lime);font-weight:1000}.tournament-card h3{font-size:25px;text-transform:uppercase;margin:5px 0 12px}.podium{display:grid;gap:8px;margin-top:16px}.podium div{padding:10px;border-radius:12px;background:#0b0b0b}
+.games-toolbar{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:20px}.games{display:grid;gap:12px}.game{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:12px;padding:16px;border:1px solid rgba(255,255,255,.09);border-radius:16px;background:#0b0b0b}.game .score{font-size:22px;color:var(--lime);font-weight:1000}.game .right{text-align:right}.game small{grid-column:1/-1;text-align:center;color:var(--muted);text-transform:uppercase}
+.hall{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}.hall-item{padding:22px;border-radius:22px;background:linear-gradient(180deg,#161616,#080808);border:1px solid var(--line);text-align:center}.hall-item .icon{font-size:38px}.hall-item strong{display:block;color:var(--lime);font-size:24px;margin-top:8px}.hall-item small{color:var(--muted);text-transform:uppercase}
+.modal{position:fixed;inset:0;z-index:120;background:rgba(0,0,0,.82);backdrop-filter:blur(12px);display:none;align-items:center;justify-content:center;padding:18px}.modal.open{display:flex}.modal-box{width:min(980px,100%);max-height:90vh;overflow:auto;background:linear-gradient(180deg,#171717,#080808);border:1px solid var(--line);border-radius:28px;padding:24px;position:relative}.close{position:absolute;right:14px;top:14px;width:38px;height:38px;border-radius:50%;background:#000;color:var(--lime);border:1px solid var(--line);cursor:pointer;font-weight:1000}.profile{display:grid;grid-template-columns:320px 1fr;gap:24px}.profile img{width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:22px}.profile h3{font-size:clamp(36px,6vw,60px);text-transform:uppercase;line-height:1}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:20px}.stat{padding:14px;border-radius:14px;background:#0b0b0b;border:1px solid rgba(255,255,255,.08)}.stat small{display:block;color:var(--muted);text-transform:uppercase}.stat strong{font-size:22px;color:var(--lime)}
+.status{text-align:center;color:var(--muted);padding:20px}footer{padding:40px 18px;text-align:center;border-top:1px solid rgba(255,255,255,.08);color:#888}footer img{width:74px;display:block;margin:0 auto 10px}
+@media(max-width:850px){.nav{align-items:flex-start;flex-direction:column}.menu{gap:12px}.kpis{grid-template-columns:repeat(2,1fr);margin-top:0}.latest{grid-template-columns:1fr}.hall{grid-template-columns:repeat(2,1fr)}.profile{grid-template-columns:1fr}.top10-featured{grid-template-columns:repeat(2,1fr)}.top10-rest{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:520px){.kpis,.hall{grid-template-columns:1fr}.controls,.games-toolbar{grid-template-columns:1fr}.game{grid-template-columns:1fr;text-align:center}.game .right{text-align:center}.stats{grid-template-columns:repeat(2,1fr)}h1{letter-spacing:-2px}.top10-featured{grid-template-columns:1fr}.top10-rest{grid-template-columns:1fr}.top10-small{grid-template-columns:72px 1fr auto}.top10-small img{width:72px;height:72px}}
+</style>
+</head>
+<body>
+<nav><div class="nav"><a class="brand" href="#inicio"><img src="logo-abre-arena-500.png"><span>ABRE ARENA 2.0</span></a><div class="menu"><a href="#inicio">Início</a><a href="#ranking">Ranking</a><a href="#atletas">Atletas</a><a href="#torneios">Torneios</a><a href="#jogos">Jogos</a><a href="#hall">Hall da Fama</a><a class="cta" href="https://wa.me/5582996070665" target="_blank">WhatsApp</a></div></div></nav>
+<header class="hero" id="inicio"><div class="hero-inner"><img src="logo-abre-arena-500.png"><div class="eyebrow">Portal oficial de Beach Tennis</div><h1>ABRE <strong>ARENA</strong></h1><p>Ranking acumulado, atletas, histórico dos torneios e resultados em um só lugar.</p><div class="actions"><a class="btn btn-primary" href="#ranking">Ver ranking</a><a class="btn btn-dark" href="#torneios">Ver torneios</a></div></div></header>
+
+<div class="container kpis">
+<div class="kpi"><strong id="kpi-torneios">--</strong><small>Torneios realizados</small></div>
+<div class="kpi"><strong id="kpi-atletas">--</strong><small>Atletas cadastrados</small></div>
+<div class="kpi"><strong id="kpi-jogos">--</strong><small>Jogos registrados</small></div>
+<div class="kpi"><strong id="kpi-lider">--</strong><small>Líder do ranking</small></div>
+</div>
+
+<section id="top10"><div class="container"><div class="section-head"><h2>Top 10 <span>do ranking</span></h2><p>Os seis primeiros em destaque e os quatro seguintes em formato compacto.</p></div><div class="top10-featured" id="top10-featured"></div><div class="top10-rest" id="top10-rest"></div></div></section>
+
+<section><div class="container"><div class="section-head"><h2>Último <span>torneio</span></h2><p>Resumo da edição mais recente.</p></div><div class="latest"><div class="panel champion-card" id="latest-tournament"><div class="status">Carregando...</div></div><div class="panel"><h3 style="margin-bottom:14px;color:var(--lime);text-transform:uppercase">Histórico de edições</h3><div class="tournament-list" id="tournament-mini-list"></div></div></div></div></section>
+
+<section id="ranking"><div class="container"><div class="section-head"><h2>Ranking <span>geral</span></h2><p>Pontuação acumulada de todos os torneios.</p></div><div class="panel rank-table"><table><thead><tr><th>Posição</th><th>Atleta</th><th>Torneios</th><th>Títulos</th><th>Vitórias</th><th>Saldo</th><th>Aproveitamento</th><th>Pontos</th></tr></thead><tbody id="ranking-body"></tbody></table></div></div></section>
+
+<section id="atletas"><div class="container"><div class="section-head"><h2>Todos os <span>atletas</span></h2><p>Comunidade oficial ABRE ARENA.</p></div><div class="controls"><input id="athlete-search" class="control" placeholder="Buscar atleta..."><select id="athlete-filter" class="control"><option value="todos">Todos</option><option value="ranqueados">Somente ranqueados</option><option value="campeoes">Campeões</option></select></div><div class="cards" id="athletes-grid"></div></div></section>
+
+<section id="torneios"><div class="container"><div class="section-head"><h2>Histórico de <span>torneios</span></h2><p>Campeões, vice-campeões e semifinalistas de cada edição.</p></div><div class="tournaments-grid" id="tournaments-grid"></div></div></section>
+
+<section id="jogos"><div class="container"><div class="section-head"><h2>Resultados dos <span>jogos</span></h2><p>Filtre por torneio e fase.</p></div><div class="games-toolbar"><select id="game-tournament" class="control"></select><select id="game-phase" class="control"><option value="todos">Todas as fases</option></select></div><div class="panel games" id="games-list"></div></div></section>
+
+<section id="hall"><div class="container"><div class="section-head"><h2>Hall da <span>Fama</span></h2><p>Os principais destaques do ranking acumulado.</p></div><div class="hall" id="hall-grid"></div></div></section>
+
+<div class="modal" id="modal"><div class="modal-box"><button class="close" onclick="closeModal()">×</button><div id="modal-content"></div></div></div>
+<footer><img src="logo-abre-arena-500.png">© 2026 ABRE ARENA — Portal oficial</footer>
+
+<script>
+const URLS={ranking:"https://docs.google.com/spreadsheets/d/e/2PACX-1vTgtGl8m4B1g5COc4Qtpx3kyVPd9koLoV44eQ5b98SULxrxzOmOerD4Nkx0f0AE0ysR-B17YMZ4yXjw/pub?gid=1024563397&single=true&output=csv",atletas:"https://docs.google.com/spreadsheets/d/e/2PACX-1vTgtGl8m4B1g5COc4Qtpx3kyVPd9koLoV44eQ5b98SULxrxzOmOerD4Nkx0f0AE0ysR-B17YMZ4yXjw/pub?gid=1825628190&single=true&output=csv",torneios:"https://docs.google.com/spreadsheets/d/e/2PACX-1vTgtGl8m4B1g5COc4Qtpx3kyVPd9koLoV44eQ5b98SULxrxzOmOerD4Nkx0f0AE0ysR-B17YMZ4yXjw/pub?gid=385733007&single=true&output=csv",jogos:"https://docs.google.com/spreadsheets/d/e/2PACX-1vTgtGl8m4B1g5COc4Qtpx3kyVPd9koLoV44eQ5b98SULxrxzOmOerD4Nkx0f0AE0ysR-B17YMZ4yXjw/pub?gid=1992345616&single=true&output=csv"};
+const FALLBACK="fotos/padrao.jpg";
+let ranking=[], atletas=[], torneios=[], jogos=[];
+
+function norm(v){return String(v??"").normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase().trim()}
+function n(v){const x=Number(String(v??0).replace(",", "."));return Number.isFinite(x)?x:0}
+function pct(v){const x=n(v);return `${Math.round((x<=1?x*100:x))}%`}
+function dateBR(v){if(!v)return"";if(/^\d+(\.\d+)?$/.test(String(v))){const d=new Date(Date.UTC(1899,11,30)+n(v)*86400000);return d.toLocaleDateString("pt-BR",{timeZone:"UTC"})}const d=new Date(v);return isNaN(d)?v:d.toLocaleDateString("pt-BR")}
+function medal(p){return p==1?"🥇 1º":p==2?"🥈 2º":p==3?"🥉 3º":`${p}º`}
+function csvRows(text){const out=[];let row=[],val="",q=false;for(let i=0;i<text.length;i++){const c=text[i],nx=text[i+1];if(c=='"'&&q&&nx=='"'){val+='"';i++;continue}if(c=='"'){q=!q;continue}if(c==','&&!q){row.push(val);val="";continue}if((c=='\n'||c=='\r')&&!q){if(val||row.length){row.push(val);out.push(row);row=[];val=""}if(c=='\r'&&nx=='\n')i++;continue}val+=c}if(val||row.length){row.push(val);out.push(row)}return out}
+function csvObjects(text){const rows=csvRows(text);if(!rows.length)return[];const h=rows[0].map(norm);return rows.slice(1).filter(r=>r.some(x=>String(x).trim())).map(r=>{const o={};h.forEach((k,i)=>o[k]=String(r[i]??"").trim());return o})}
+async function load(url){const res=await fetch(url+(url.includes("?")?"&":"?")+"cache="+Date.now());if(!res.ok)throw new Error("Falha ao carregar dados");return csvObjects(await res.text())}
+function photo(name,file){if(file)return `fotos/${file}`;const key=norm(name).replace(/[^a-z0-9]/g,"");return `fotos/${key}.jpg`}
+function imgError(el){el.onerror=null;el.src=FALLBACK}
+
+function mapData(){
+ ranking=ranking.map(r=>({pos:n(r.posicao),nome:r.jogador,pontos:n(r.pontos),torneios:n(r.torneios),titulos:n(r.titulos),vices:n(r.vices),semis:n(r.semifinais),jogos:n(r.jogos),vitorias:n(r.vitorias),saldo:n(r.saldo),aproveitamento:n(r.aproveitamento),ultima:r["ultima fase"]}));
+ atletas=atletas.filter(a=>norm(a.status)!="inativo").map(a=>({nome:a.nome,apelido:a.apelido||a.nome,cidade:a.cidade,foto:a.foto,status:a.status}));
+ torneios=torneios.map(t=>({id:n(t.id),nome:t.torneio,data:t.data,local:t.local,participantes:n(t.participantes),campeoes:t.campeoes,vice:t["vice-campeoes"],semi1:t["semifinalista 1"],semi2:t["semifinalista 2"],status:t.status})).sort((a,b)=>b.id-a.id);
+ jogos=jogos.map(j=>({id:n(j["torneio id"]),torneio:j.torneio,data:j.data,fase:j.fase,grupo:j.grupo,duplaA:j["dupla a"],a:n(j["pontos a"]),b:n(j["pontos b"]),duplaB:j["dupla b"],vencedor:j.vencedor}));
+}
+
+function renderKPIs(){
+ document.getElementById("kpi-torneios").textContent=torneios.length;
+ document.getElementById("kpi-atletas").textContent=atletas.length;
+ document.getElementById("kpi-jogos").textContent=jogos.length;
+ document.getElementById("kpi-lider").textContent=ranking[0]?.nome||"--";
+}
+function renderTop10(){
+ const top=mergedAthletes().filter(a=>a.rank).slice(0,10);
+ const featured=top.slice(0,6);
+ const rest=top.slice(6,10);
+
+ document.getElementById("top10-featured").innerHTML=featured.map(a=>`
+   <div class="athlete" onclick="openAthlete('${String(a.apelido).replace(/'/g,"\\'")}')">
+     <div class="rank">${medal(a.rank.pos)}</div>
+     <img src="${photo(a.apelido,a.foto)}" onerror="imgError(this)" alt="${a.apelido}">
+     <h3>${a.apelido}</h3>
+     <div class="pts">${a.rank.pontos} pts</div>
+     <div class="city">${a.rank.vitorias} vitórias · saldo ${a.rank.saldo>0?"+":""}${a.rank.saldo}</div>
+   </div>
+ `).join("");
+
+ document.getElementById("top10-rest").innerHTML=rest.map(a=>`
+   <div class="top10-small" onclick="openAthlete('${String(a.apelido).replace(/'/g,"\\'")}')">
+     <img src="${photo(a.apelido,a.foto)}" onerror="imgError(this)" alt="${a.apelido}">
+     <div>
+       <h3>${a.apelido}</h3>
+       <div class="small-meta">${a.rank.vitorias} vitórias · saldo ${a.rank.saldo>0?"+":""}${a.rank.saldo}</div>
+     </div>
+     <div class="small-points">
+       <span class="small-position">${medal(a.rank.pos)}</span>
+       ${a.rank.pontos} pts
+     </div>
+   </div>
+ `).join("");
+}
+
+function renderLatest(){
+ const t=torneios[0];const el=document.getElementById("latest-tournament");
+ if(!t){el.innerHTML='<div class="status">Nenhum torneio encontrado.</div>';return}
+ el.innerHTML=`<div class="tag">${t.nome}</div><h3>${t.campeoes}</h3><p>Campeões da edição mais recente</p><div class="meta"><span class="chip">📅 ${dateBR(t.data)}</span><span class="chip">📍 ${t.local}</span><span class="chip">👥 ${t.participantes} atletas</span><span class="chip">🥈 ${t.vice}</span></div>`;
+ document.getElementById("tournament-mini-list").innerHTML=torneios.map(x=>`<div class="tournament-mini" onclick="openTournament(${x.id})"><strong>${x.nome}</strong><small>${dateBR(x.data)} · ${x.local} · Campeões: ${x.campeoes}</small></div>`).join("");
+}
+function renderRanking(){
+ document.getElementById("ranking-body").innerHTML=ranking.map((r,i)=>`<tr class="${i==0?"leader":""}"><td class="position">${medal(r.pos)}</td><td>${r.nome}</td><td>${r.torneios}</td><td>${r.titulos}</td><td>${r.vitorias}</td><td>${r.saldo>0?"+":""}${r.saldo}</td><td>${pct(r.aproveitamento)}</td><td><strong>${r.pontos}</strong></td></tr>`).join("");
+}
+function mergedAthletes(){
+ const rm=new Map(ranking.map(r=>[norm(r.nome),r]));
+ return atletas.map(a=>{const r=rm.get(norm(a.apelido))||rm.get(norm(a.nome));return {...a,rank:r||null}}).sort((a,b)=>(a.rank?.pos||999)-(b.rank?.pos||999)||a.apelido.localeCompare(b.apelido));
+}
+function filteredAthletes(){
+ const q=norm(document.getElementById("athlete-search").value);const f=document.getElementById("athlete-filter").value;
+ return mergedAthletes().filter(a=>(!q||norm(a.nome+" "+a.apelido+" "+a.cidade).includes(q))&&(f=="todos"||(f=="ranqueados"&&a.rank)||(f=="campeoes"&&a.rank?.titulos>0)));
+}
+function renderAthletes(){
+ document.getElementById("athletes-grid").innerHTML=filteredAthletes().map(a=>`<div class="athlete" onclick="openAthlete('${String(a.apelido).replace(/'/g,"\\'")}')">${a.rank?`<div class="rank">${medal(a.rank.pos)}</div>`:""}<img src="${photo(a.apelido,a.foto)}" onerror="imgError(this)" alt="${a.apelido}"><h3>${a.apelido}</h3><div class="pts">${a.rank?a.rank.pontos+" pts":"Comunidade"}</div><div class="city">${a.cidade||"ABRE ARENA"}</div></div>`).join("");
+}
+function renderTournaments(){
+ document.getElementById("tournaments-grid").innerHTML=torneios.map(t=>`<div class="tournament-card" onclick="openTournament(${t.id})"><div class="id">EDIÇÃO ${t.id}</div><h3>${t.nome}</h3><div>📅 ${dateBR(t.data)} · 📍 ${t.local}</div><div class="podium"><div>🥇 ${t.campeoes}</div><div>🥈 ${t.vice}</div><div>🥉 ${t.semi1} · ${t.semi2}</div></div></div>`).join("");
+}
+function setupGames(){
+ const ts=document.getElementById("game-tournament");ts.innerHTML=torneios.map(t=>`<option value="${t.id}">${t.nome}</option>`).join("");
+ const phases=[...new Set(jogos.map(j=>j.fase))];document.getElementById("game-phase").innerHTML='<option value="todos">Todas as fases</option>'+phases.map(p=>`<option>${p}</option>`).join("");
+ renderGames();
+}
+function renderGames(){
+ const id=n(document.getElementById("game-tournament").value);const phase=document.getElementById("game-phase").value;
+ const list=jogos.filter(j=>j.id==id&&(phase=="todos"||j.fase==phase));
+ document.getElementById("games-list").innerHTML=list.length?list.map(j=>`<div class="game"><strong>${j.duplaA}</strong><span class="score">${j.a} × ${j.b}</span><strong class="right">${j.duplaB}</strong><small>${j.fase}${j.grupo?" · Grupo "+j.grupo:""} · Vencedor: ${j.vencedor}</small></div>`).join(""):'<div class="status">Nenhum jogo encontrado.</div>';
+}
+function renderHall(){
+ const mostTitles=[...ranking].sort((a,b)=>b.titulos-a.titulos||b.pontos-a.pontos)[0];
+ const mostWins=[...ranking].sort((a,b)=>b.vitorias-a.vitorias)[0];
+ const bestPct=[...ranking].filter(x=>x.jogos>=3).sort((a,b)=>b.aproveitamento-a.aproveitamento)[0];
+ const mostGames=[...ranking].sort((a,b)=>b.jogos-a.jogos)[0];
+ const items=[["👑","Maior campeão",mostTitles?.nome,`${mostTitles?.titulos||0} título(s)`],["🔥","Mais vitórias",mostWins?.nome,`${mostWins?.vitorias||0} vitórias`],["🎯","Melhor aproveitamento",bestPct?.nome,pct(bestPct?.aproveitamento||0)],["🎾","Mais jogos",mostGames?.nome,`${mostGames?.jogos||0} jogos`]];
+ document.getElementById("hall-grid").innerHTML=items.map(x=>`<div class="hall-item"><div class="icon">${x[0]}</div><small>${x[1]}</small><strong>${x[2]||"--"}</strong><div>${x[3]}</div></div>`).join("");
+}
+function openAthlete(name){
+ const a=mergedAthletes().find(x=>norm(x.apelido)==norm(name));if(!a)return;const r=a.rank;
+ document.getElementById("modal-content").innerHTML=`<div class="profile"><img src="${photo(a.apelido,a.foto)}" onerror="imgError(this)"><div><h3>${a.apelido}</h3><p>${a.nome}${a.cidade?" · "+a.cidade:""}</p><div class="stats"><div class="stat"><small>Posição</small><strong>${r?medal(r.pos):"—"}</strong></div><div class="stat"><small>Pontos</small><strong>${r?.pontos||0}</strong></div><div class="stat"><small>Torneios</small><strong>${r?.torneios||0}</strong></div><div class="stat"><small>Títulos</small><strong>${r?.titulos||0}</strong></div><div class="stat"><small>Vitórias</small><strong>${r?.vitorias||0}</strong></div><div class="stat"><small>Aproveitamento</small><strong>${pct(r?.aproveitamento||0)}</strong></div></div><p style="margin-top:18px;color:#aaa">Último resultado: ${r?.ultima||"Ainda não participou"}</p></div></div>`;openModal();
+}
+function openTournament(id){
+ const t=torneios.find(x=>x.id==id);if(!t)return;const gs=jogos.filter(x=>x.id==id);
+ document.getElementById("modal-content").innerHTML=`<h2 style="font-size:42px;text-transform:uppercase;color:var(--lime)">${t.nome}</h2><p>${dateBR(t.data)} · ${t.local} · ${t.participantes} atletas</p><div class="podium" style="margin:20px 0"><div>🥇 Campeões: ${t.campeoes}</div><div>🥈 Vice: ${t.vice}</div><div>🥉 Semifinalistas: ${t.semi1} · ${t.semi2}</div></div><h3 style="margin-bottom:12px">Jogos da edição</h3><div class="games">${gs.map(j=>`<div class="game"><strong>${j.duplaA}</strong><span class="score">${j.a} × ${j.b}</span><strong class="right">${j.duplaB}</strong><small>${j.fase}${j.grupo?" · Grupo "+j.grupo:""}</small></div>`).join("")}</div>`;openModal();
+}
+function openModal(){document.getElementById("modal").classList.add("open")}function closeModal(){document.getElementById("modal").classList.remove("open")}
+async function init(){
+ try{[ranking,atletas,torneios,jogos]=await Promise.all([load(URLS.ranking),load(URLS.atletas),load(URLS.torneios),load(URLS.jogos)]);mapData();renderKPIs();renderTop10();renderLatest();renderRanking();renderAthletes();renderTournaments();setupGames();renderHall()}
+ catch(e){console.error(e);document.body.insertAdjacentHTML("beforeend",`<div style="position:fixed;bottom:15px;left:15px;right:15px;background:#821;color:#fff;padding:14px;border-radius:12px;z-index:200">Não foi possível carregar a planilha. Verifique se as abas continuam publicadas como CSV.</div>`)}
+ document.getElementById("athlete-search").addEventListener("input",renderAthletes);document.getElementById("athlete-filter").addEventListener("change",renderAthletes);document.getElementById("game-tournament").addEventListener("change",renderGames);document.getElementById("game-phase").addEventListener("change",renderGames);
+}
+init();
+</script>
+</body></html>
